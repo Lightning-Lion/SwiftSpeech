@@ -114,6 +114,13 @@ public extension SwiftSpeech.Session {
         public var interactionIdentifier: String? = nil
         
         /**
+         Set this property to true for the speech framework to automatically include punctuation in the recognition results. Punctuation includes a period or question mark at the end of a sentence, and a comma within a sentence.
+         
+         Only avaliable on iOS 16.0+, visionOS 1.0+
+         */
+        public var addsPunctuation:Bool = true
+        
+        /**
          A configuration for configuring/activating/deactivating your app's `AVAudioSession` at the appropriate time.
          The default value is `.recordOnly`, which activate/deactivate a **record only** audio session when a recording session starts/stops.
          
@@ -136,6 +143,28 @@ public extension SwiftSpeech.Session {
             self.requiresOnDeviceRecognition = requiresOnDeviceRecognition
             self.contextualStrings = contextualStrings
             self.interactionIdentifier = interactionIdentifier
+            self.audioSessionConfiguration = audioSessionConfiguration
+        }
+        
+        
+        @available(iOS 16,visionOS 1.0, *)
+        public init(
+            locale: Locale = .current,
+            taskHint: SFSpeechRecognitionTaskHint = .unspecified,
+            shouldReportPartialResults: Bool = true,
+            requiresOnDeviceRecognition: Bool = false,
+            contextualStrings: [String] = [],
+            interactionIdentifier: String? = nil,
+            addsPunctuation: Bool = true,
+            audioSessionConfiguration: AudioSessionConfiguration = .recordOnly
+        ) {
+            self.locale = locale
+            self.taskHint = taskHint
+            self.shouldReportPartialResults = shouldReportPartialResults
+            self.requiresOnDeviceRecognition = requiresOnDeviceRecognition
+            self.contextualStrings = contextualStrings
+            self.interactionIdentifier = interactionIdentifier
+            self.addsPunctuation = addsPunctuation
             self.audioSessionConfiguration = audioSessionConfiguration
         }
     }

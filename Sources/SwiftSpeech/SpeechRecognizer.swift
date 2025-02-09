@@ -65,6 +65,9 @@ public class SpeechRecognizer {
             recognitionRequest.taskHint = sessionConfiguration.taskHint
             recognitionRequest.contextualStrings = sessionConfiguration.contextualStrings
             recognitionRequest.interactionIdentifier = sessionConfiguration.interactionIdentifier
+            if #available(iOS 16,visionOS 1.0, *) {
+                recognitionRequest.addsPunctuation = sessionConfiguration.addsPunctuation
+            }
             
             // Create a recognition task for the speech recognition session.
             // Keep a reference to the task so that it can be cancelled.
